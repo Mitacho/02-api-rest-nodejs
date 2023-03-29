@@ -1,17 +1,20 @@
-import fastify from 'fastify'
-import { env } from './env'
-import { transactionsRoutes } from './routes/transactions'
+import cookie from "@fastify/cookie";
+import fastify from "fastify";
 
-const app = fastify()
+import { env } from "./env";
+import { transactionsRoutes } from "./routes/transactions";
 
+const app = fastify();
+
+app.register(cookie);
 app.register(transactionsRoutes, {
-  prefix: 'transactions',
-})
+  prefix: "transactions",
+});
 
 app
   .listen({
     port: env.PORT,
   })
   .then(() => {
-    console.log('HTTP server running!')
-  })
+    console.log("HTTP server running!");
+  });
